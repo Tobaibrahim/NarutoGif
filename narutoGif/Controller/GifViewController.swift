@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GifViewController.swift
 //  narutoGif
 //
 //  Created by TXB4 on 28/07/2020.
@@ -8,13 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GifViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+         configureUI()
+    
+    }
+    
+    func configureUI() {
+        view.backgroundColor = Colours.appBackground
     }
 
-
 }
+
 
