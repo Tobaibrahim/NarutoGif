@@ -191,6 +191,7 @@ class MainViewController: UIViewController {
         print("DEBUG: Copy URL = \(copiedString)")
         
         let alert = UIAlertController(title: "Copied", message: "Gif copied to clipboard", preferredStyle: .alert)
+        alert.view.tintColor = Colours.appOrange
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (UIAlertAction) in
         }))
         
