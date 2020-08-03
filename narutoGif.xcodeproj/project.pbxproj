@@ -25,6 +25,7 @@
 		84E9429324D750E4002456DA /* Kamui.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84E9429224D750E4002456DA /* Kamui.m4a */; };
 		84E9429524D75613002456DA /* kamui2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84E9429424D75613002456DA /* kamui2.m4a */; };
 		84E9429724D7568F002456DA /* kamui3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84E9429624D7568F002456DA /* kamui3.m4a */; };
+		84EF19F824D8928A001A6EC5 /* sassy.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84EF19F724D8928A001A6EC5 /* sassy.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		84E9429224D750E4002456DA /* Kamui.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kamui.m4a; sourceTree = "<group>"; };
 		84E9429424D75613002456DA /* kamui2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = kamui2.m4a; sourceTree = "<group>"; };
 		84E9429624D7568F002456DA /* kamui3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = kamui3.m4a; sourceTree = "<group>"; };
+		84EF19F724D8928A001A6EC5 /* sassy.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sassy.gif; sourceTree = "<group>"; };
 		E12BCB12681C2E3637906AA9 /* Pods-narutoGif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-narutoGif.debug.xcconfig"; path = "Target Support Files/Pods-narutoGif/Pods-narutoGif.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				847DF36824D02D24004F8D98 /* SceneDelegate.swift */,
 				847DF36F24D02D27004F8D98 /* Assets.xcassets */,
 				847DF39924D1D8C1004F8D98 /* sasuke.gif */,
+				84EF19F724D8928A001A6EC5 /* sassy.gif */,
 				84E9429624D7568F002456DA /* kamui3.m4a */,
 				84E9429424D75613002456DA /* kamui2.m4a */,
 				84E9429224D750E4002456DA /* Kamui.m4a */,
@@ -239,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EF19F824D8928A001A6EC5 /* sassy.gif in Resources */,
 				84E9429324D750E4002456DA /* Kamui.m4a in Resources */,
 				84E9429524D75613002456DA /* kamui2.m4a in Resources */,
 				847DF37324D02D27004F8D98 /* LaunchScreen.storyboard in Resources */,

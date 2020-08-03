@@ -16,7 +16,7 @@ class MainViewController: UIViewController {
     
     //MARK: Properties
     var networkUrlArray = [String?]()
-    var urlArray    = [String]()
+    var urlArray        = [String]()
     var urlString   = String()
     var gifImage    = GiphyYYImage()
     var copiedGif   = String()
@@ -110,8 +110,8 @@ class MainViewController: UIViewController {
     func randomName() -> String {
         let md = RandomNames()
         let name = md.names
-        let randomIndex = Int(arc4random_uniform(UInt32(name.count)))
-        return name[randomIndex]
+        let randomNumber = Int.random(in: 0...name.count)
+        return name[randomNumber]
     }
     
     
@@ -130,7 +130,6 @@ class MainViewController: UIViewController {
 //                let mappedUrl = gif.data[0].images.map{$0.value.url}
 //                self.networkUrlArray.append(contentsOf: mappedUrl)
 //                    print("DEBUG: networkUrlArray ARRAY = \(self.networkUrlArray)")
-//                let randomNumber = Int.random(in: 0...7)
                 for (value) in gif.data[0].images {
                     
                     guard let safeValue = value.value.url else {return}
@@ -174,13 +173,26 @@ class MainViewController: UIViewController {
         copyGifLabel.addGestureRecognizer(tapAction)
         
         
-        let tap               = UITapGestureRecognizer(target: self, action: #selector(copyButtonTapped))
+        let tap               = UITapGestureRecognizer(target: self, action: #selector(kunaiButtonTapped))
         homeButton.isUserInteractionEnabled = true
         homeButton.addGestureRecognizer(tap)
         
         
         audioPlayer.setVolume(0.1, fadeDuration: 1)
         
+        
+    }
+    
+    
+    @objc func kunaiButtonTapped() {
+        print("DEBUG: KUNAI TAPPED")
+        
+        avatar.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: mainButton.topAnchor, trailing: view.trailingAnchor, paddingTop: 150, paddingLeft: 20, paddingBottom: 5, paddingRight: 20, width: 700, height: 900)
+        
+        let path = Bundle(for: MainViewController.self).path(forResource: "sassy", ofType: "gif")
+        let image = GiphyYYImage(contentsOfFile: path ?? "")
+        avatar.isHidden = false
+        self.avatar.image = image
         
     }
     
