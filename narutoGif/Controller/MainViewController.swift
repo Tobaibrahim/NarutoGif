@@ -107,15 +107,17 @@ class MainViewController: UIViewController {
     
     //MARK: Helpers
     
-    func randomName() -> String {
-        let md = RandomNames()
-        let name = md.names
-        let randomNumber = Int.random(in: 0...name.count)
-        return name[randomNumber]
-    }
+    
     
     
     func testNetworkCall() {
+        
+        func randomName() -> String {
+            let md = RandomNames()
+            let name = md.names
+            let randomNumber = Int.random(in: 0...name.count)
+            return name[randomNumber]
+        }
         
         NetworkManager.shared.getGifImage(pagination: "1", name:randomName()) {[weak self] result in
             guard let self = self else {return}
@@ -230,11 +232,9 @@ class MainViewController: UIViewController {
         avatar.isHidden = false
         print("DEBUG: Button pressed")
         
-        var randomInt           = 1
-        randomInt               += 1
-        let randomUrl           = self.urlArray[0]
-        guard let fileUrl       = URL(string: randomUrl) else {return}
-        self.urlString          = (randomUrl)
+       
+        guard let fileUrl       = URL(string: urlArray[0]) else {return}
+        self.urlString          = (urlArray[0])
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.load(url: fileUrl)
