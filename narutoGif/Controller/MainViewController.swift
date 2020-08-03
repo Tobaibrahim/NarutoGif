@@ -117,7 +117,7 @@ class MainViewController: UIViewController {
     
     func testNetworkCall() {
         
-        NetworkManager.shared.getGifImage(pagination: "8", name:randomName()) {[weak self] result in
+        NetworkManager.shared.getGifImage(pagination: "1", name:randomName()) {[weak self] result in
             guard let self = self else {return}
             switch result {
             case.failure(let error):
@@ -130,13 +130,13 @@ class MainViewController: UIViewController {
 //                let mappedUrl = gif.data[0].images.map{$0.value.url}
 //                self.networkUrlArray.append(contentsOf: mappedUrl)
 //                    print("DEBUG: networkUrlArray ARRAY = \(self.networkUrlArray)")
-                let randomNumber = Int.random(in: 1...7)
-                for (value) in gif.data[randomNumber].images {
+//                let randomNumber = Int.random(in: 0...7)
+                for (value) in gif.data[0].images {
                     
                     guard let safeValue = value.value.url else {return}
                     self.urlArray.append(safeValue)
                     let snapshopValue             = safeValue
-                    self.copiedGif               = snapshopValue
+                    self.copiedGif                = snapshopValue
                     guard let fileUrl             = URL(string: snapshopValue) else {return}
                     self.load(url: fileUrl)
                         
