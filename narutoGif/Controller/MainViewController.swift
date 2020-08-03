@@ -9,15 +9,33 @@
 import UIKit
 import GiphyUISDK
 import GiphyCoreSDK
+import AVFoundation
 
 class MainViewController: UIViewController {
     
     
     //MARK: Properties
-    var urlArray  = [String]()
-    var urlString =  String()
-    var gifImage  = GiphyYYImage()
-    var copiedGif = String()
+    var networkUrlArray = [String?]()
+    var urlArray    = [String]()
+    var urlString   = String()
+    var gifImage    = GiphyYYImage()
+    var copiedGif   = String()
+    let pasteBoard  = UIPasteboard.general
+    
+    
+    
+    var audioPlayer: AVAudioPlayer = {
+        var audioPlayer = AVAudioPlayer()
+        var sound       = Bundle.main.path(forResource: "kamui3", ofType: "m4a")
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+        }
+            
+        catch {
+            print("DEBUG: Audio player error \(error.localizedDescription)")
+        }
+        return audioPlayer
+    }()
     
     let copyGifLabel:UILabel = {
         let label = UILabel()
@@ -40,8 +58,6 @@ class MainViewController: UIViewController {
         homeButton.image = UIImage(named: "Star")
         homeButton.contentMode = .scaleAspectFit
         homeButton.clipsToBounds = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(backButtonPressed))
-        homeButton.addGestureRecognizer(tap)
         homeButton.translatesAutoresizingMaskIntoConstraints = false
         return homeButton
     }()
@@ -85,54 +101,53 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        //        testNetworkCall()
+        testNetworkCall()
+
     }
+    
     //MARK: Helpers
+    
+    func randomName() -> String {
+        let md = RandomNames()
+        let name = md.names
+        let randomIndex = Int(arc4random_uniform(UInt32(name.count)))
+        return name[randomIndex]
+    }
     
     
     func testNetworkCall() {
         
-        func randomName() -> String {
-            let md = RandomNames()
-            let name = md.names
-            let randomIndex = Int(arc4random_uniform(UInt32(name.count)))
-            return name[randomIndex]
-        }
-        
-        func randomNumber() -> Int {
-            let num = [1,2,3,4,5,6,7,8,9]
-            let randomIndex = Int(arc4random_uniform(UInt32(num.count)))
-            return num[randomIndex]
-        }
-        
-        NetworkManager.shared.getGifImage(pagination: "11", name: randomName()) {[weak self] result in
-            
-            guard self != nil else {return}
+        NetworkManager.shared.getGifImage(pagination: "8", name:randomName()) {[weak self] result in
+            guard let self = self else {return}
             switch result {
             case.failure(let error):
                 print("DEBUG: \(error.localizedDescription)")
                 
             case.success(let gif):
-                
-                for (value) in gif.data[randomNumber()].images {
+//                var randomInt           = 1
+//                randomInt               += 1
+//                    print("DEBUG: URL ARRAY = \(gif.data[0].url)")
+//                let mappedUrl = gif.data[0].images.map{$0.value.url}
+//                self.networkUrlArray.append(contentsOf: mappedUrl)
+//                    print("DEBUG: networkUrlArray ARRAY = \(self.networkUrlArray)")
+                let randomNumber = Int.random(in: 1...7)
+                for (value) in gif.data[randomNumber].images {
                     
                     guard let safeValue = value.value.url else {return}
-                    self!.urlArray.append(safeValue)
+                    self.urlArray.append(safeValue)
                     let snapshopValue             = safeValue
-                    self!.copiedGif               = snapshopValue
+                    self.copiedGif               = snapshopValue
                     guard let fileUrl             = URL(string: snapshopValue) else {return}
-                    self!.load(url: fileUrl)
+                    self.load(url: fileUrl)
                         
                 }
-                print("DEBUG: URL ARRAY = \(self!.urlArray)")
+                print("DEBUG: URL ARRAY = \(self.urlArray)")
 
             }
             
         }
         
     }
-    
-    
     
     func configureUI() {
         view.backgroundColor = Colours.appBackground
@@ -151,17 +166,49 @@ class MainViewController: UIViewController {
         
         homeButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor, paddingTop: 23, paddingLeft: 23, paddingBottom: 729, paddingRight: 292, width: 50, height: 50)
         
-        copyGifLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: homeButton.trailingAnchor, bottom: staticImage.topAnchor, trailing: view.trailingAnchor, paddingTop: 10, paddingLeft: 210, paddingBottom: 60, paddingRight: 1, width: 70, height: 70)
+        copyGifLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: homeButton.trailingAnchor, bottom: staticImage.topAnchor, trailing: view.trailingAnchor, paddingTop: 10, paddingLeft: 210, paddingBottom: 10, paddingRight: 5, width: 70, height: 70)
+        
+        
+        let tapAction         = UITapGestureRecognizer(target: self, action: #selector(copyButtonTapped))
+        copyGifLabel.isUserInteractionEnabled = true
+        copyGifLabel.addGestureRecognizer(tapAction)
+        
+        
+        let tap               = UITapGestureRecognizer(target: self, action: #selector(copyButtonTapped))
+        homeButton.isUserInteractionEnabled = true
+        homeButton.addGestureRecognizer(tap)
+        
+        
+        audioPlayer.setVolume(0.1, fadeDuration: 1)
+        
         
     }
     
-    @objc func backButtonPressed() {
-        print("DEBUG: Back Button pressed")
+    @objc func copyButtonTapped() {
+        print("DEBUG: Copy Button pressed")
+        pasteBoard.string = urlString
+        guard let copiedString = pasteBoard.string else {return}
+        print("DEBUG: Copy URL = \(copiedString)")
+        
+        let alert = UIAlertController(title: "Copied", message: "Gif copied to clipboard", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (UIAlertAction) in
+        }))
+        
+        if copiedString.isEmpty {
+            print("DEBUG: Gif not copied")
+        }
+            
+        else {
+            print("DEBUG: Gif copied Sucessfully")
+            self.present(alert, animated: true, completion: nil)
+            
+        }
     }
     
     @objc func buttonPressed() {
-        testNetworkCall()
         
+        testNetworkCall()
+        audioPlayer.play()
         let path = Bundle(for: MainViewController.self).path(forResource: "ezgif.com-video-to-gif-5", ofType: "gif")
         let image = GiphyYYImage(contentsOfFile: path ?? "")
         self.avatar.image = image
@@ -170,11 +217,17 @@ class MainViewController: UIViewController {
         avatar.isHidden = false
         print("DEBUG: Button pressed")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            
-            self.avatar.image = self.gifImage
-        }
+        var randomInt           = 1
+        randomInt               += 1
+        let randomUrl           = self.urlArray[0]
+        guard let fileUrl       = URL(string: randomUrl) else {return}
+        self.urlString          = (randomUrl)
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.load(url: fileUrl)
+            print("DEBUG: URL ARRAY = \(self.networkUrlArray)")
+            self.avatar.image       = self.gifImage
+        }
     }
     
     func load(url: URL) {
@@ -183,7 +236,7 @@ class MainViewController: UIViewController {
             if let data = try? Data(contentsOf: url) {
                 guard let image = GiphyYYImage(data: data) else {return}
                 self!.gifImage = image
-
+                
             }
         }
     }

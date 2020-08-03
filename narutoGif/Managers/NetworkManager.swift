@@ -13,7 +13,9 @@ class NetworkManager {
 static let shared     = NetworkManager()
 
 let cache             = NSCache<NSString,UIImage>()
-let key               =  "UFA2wVfgxH1nHxII7dJoTyuxSc314QJo"
+let key               =  "zeYoxg4MSuyYg9qQyQVcp0Ily3dVBEJI"
+    
+//    UFA2wVfgxH1nHxII7dJoTyuxSc314QJo
 private let baseURL   =  "http://api.giphy.com/v1/gifs/search?"
 private init () {}
 
@@ -63,7 +65,7 @@ private init () {}
             catch {
                 
                 completed(.failure(.invalidDataResponse))
-                print(error)
+                print(error.localizedDescription)
                 //              print(data)
             }
         }

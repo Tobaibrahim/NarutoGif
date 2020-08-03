@@ -22,6 +22,9 @@
 		847DF39824D1C69E004F8D98 /* ezgif.com-video-to-gif-5.gif in Resources */ = {isa = PBXBuildFile; fileRef = 847DF39724D1C69E004F8D98 /* ezgif.com-video-to-gif-5.gif */; };
 		847DF39A24D1D8C1004F8D98 /* sasuke.gif in Resources */ = {isa = PBXBuildFile; fileRef = 847DF39924D1D8C1004F8D98 /* sasuke.gif */; };
 		847DF39C24D1E25E004F8D98 /* RandomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DF39B24D1E25E004F8D98 /* RandomNames.swift */; };
+		84E9429324D750E4002456DA /* Kamui.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84E9429224D750E4002456DA /* Kamui.m4a */; };
+		84E9429524D75613002456DA /* kamui2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84E9429424D75613002456DA /* kamui2.m4a */; };
+		84E9429724D7568F002456DA /* kamui3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84E9429624D7568F002456DA /* kamui3.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		847DF39724D1C69E004F8D98 /* ezgif.com-video-to-gif-5.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "ezgif.com-video-to-gif-5.gif"; sourceTree = "<group>"; };
 		847DF39924D1D8C1004F8D98 /* sasuke.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sasuke.gif; sourceTree = "<group>"; };
 		847DF39B24D1E25E004F8D98 /* RandomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNames.swift; sourceTree = "<group>"; };
+		84E9429224D750E4002456DA /* Kamui.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Kamui.m4a; sourceTree = "<group>"; };
+		84E9429424D75613002456DA /* kamui2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = kamui2.m4a; sourceTree = "<group>"; };
+		84E9429624D7568F002456DA /* kamui3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = kamui3.m4a; sourceTree = "<group>"; };
 		E12BCB12681C2E3637906AA9 /* Pods-narutoGif.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-narutoGif.debug.xcconfig"; path = "Target Support Files/Pods-narutoGif/Pods-narutoGif.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +103,9 @@
 				847DF36824D02D24004F8D98 /* SceneDelegate.swift */,
 				847DF36F24D02D27004F8D98 /* Assets.xcassets */,
 				847DF39924D1D8C1004F8D98 /* sasuke.gif */,
+				84E9429624D7568F002456DA /* kamui3.m4a */,
+				84E9429424D75613002456DA /* kamui2.m4a */,
+				84E9429224D750E4002456DA /* Kamui.m4a */,
 				847DF39724D1C69E004F8D98 /* ezgif.com-video-to-gif-5.gif */,
 				847DF37124D02D27004F8D98 /* LaunchScreen.storyboard */,
 				847DF37424D02D27004F8D98 /* Info.plist */,
@@ -230,7 +239,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E9429324D750E4002456DA /* Kamui.m4a in Resources */,
+				84E9429524D75613002456DA /* kamui2.m4a in Resources */,
 				847DF37324D02D27004F8D98 /* LaunchScreen.storyboard in Resources */,
+				84E9429724D7568F002456DA /* kamui3.m4a in Resources */,
 				847DF37024D02D27004F8D98 /* Assets.xcassets in Resources */,
 				847DF39A24D1D8C1004F8D98 /* sasuke.gif in Resources */,
 				847DF39824D1C69E004F8D98 /* ezgif.com-video-to-gif-5.gif in Resources */,
