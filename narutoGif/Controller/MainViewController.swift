@@ -17,10 +17,10 @@ class MainViewController: UIViewController {
     //MARK: Properties
     var networkUrlArray = [String?]()
     var urlArray        = [String]()
-    var urlString   = String()
-    var gifImage    = GiphyYYImage()
-    var copiedGif   = String()
-    let pasteBoard  = UIPasteboard.general
+    var urlString       = String()
+    var gifImage        = GiphyYYImage()
+    var copiedGif       = String()
+    let pasteBoard      = UIPasteboard.general
     
     
     
@@ -78,15 +78,7 @@ class MainViewController: UIViewController {
         return image
     }()
     
-    let staticImageBorder:UIView = {
-        let border = UIView()
-        border.backgroundColor = Colours.appOrange
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.layer.cornerRadius = 12
-        return border
-    }()
-    
-    
+   
     let avatar: GiphyYYAnimatedImageView = {
         let imageView = GiphyYYAnimatedImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -107,15 +99,12 @@ class MainViewController: UIViewController {
     
     //MARK: Helpers
     
-    
-    
-    
     func testNetworkCall() {
         
         func randomName() -> String {
             let md = RandomNames()
             let name = md.names
-            let randomNumber = Int.random(in: 0...name.count)
+            let randomNumber = Int.random(in: 0...27)
             return name[randomNumber]
         }
         
@@ -135,7 +124,7 @@ class MainViewController: UIViewController {
                 for (value) in gif.data[0].images {
                     
                     guard let safeValue = value.value.url else {return}
-                    self.urlArray.append(safeValue)
+                    self.urlString = safeValue
                     let snapshopValue             = safeValue
                     self.copiedGif                = snapshopValue
                     guard let fileUrl             = URL(string: snapshopValue) else {return}
@@ -178,8 +167,6 @@ class MainViewController: UIViewController {
         let tap               = UITapGestureRecognizer(target: self, action: #selector(kunaiButtonTapped))
         homeButton.isUserInteractionEnabled = true
         homeButton.addGestureRecognizer(tap)
-        
-        
         audioPlayer.setVolume(0.1, fadeDuration: 1)
         
         
@@ -233,8 +220,8 @@ class MainViewController: UIViewController {
         print("DEBUG: Button pressed")
         
        
-        guard let fileUrl       = URL(string: urlArray[0]) else {return}
-        self.urlString          = (urlArray[0])
+        guard let fileUrl       = URL(string: urlString) else {return}
+//        self.urlString          = (urlArray[0])
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.load(url: fileUrl)
