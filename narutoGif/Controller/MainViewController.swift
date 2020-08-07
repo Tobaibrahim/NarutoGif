@@ -163,7 +163,6 @@ class MainViewController: UIViewController {
         copyGifLabel.isUserInteractionEnabled = true
         copyGifLabel.addGestureRecognizer(tapAction)
         
-        
         let tap               = UITapGestureRecognizer(target: self, action: #selector(kunaiButtonTapped))
         homeButton.isUserInteractionEnabled = true
         homeButton.addGestureRecognizer(tap)
@@ -233,9 +232,10 @@ class MainViewController: UIViewController {
     func load(url: URL) {
         
         DispatchQueue.global().async { [weak self] in
+            guard let self = self else {return}
             if let data = try? Data(contentsOf: url) {
                 guard let image = GiphyYYImage(data: data) else {return}
-                self!.gifImage = image
+                self.gifImage = image
                 
             }
         }
